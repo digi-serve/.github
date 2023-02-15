@@ -94,12 +94,3 @@ jobs:
                 }
               }
             }' -f project=$PROJECT_ID -f item=$ITEM_ID -f status_field=$STATUS_FIELD_ID -f status_value=${{ env.TODO_OPTION_ID }} -f date_field=$DATE_FIELD_ID -f date_value=$DATE --silent
-  add-label:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Add label to issue
-        uses: peter-evans/add-labels@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          labels: ["High Priority", "Incident"]
-          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
