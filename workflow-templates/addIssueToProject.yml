@@ -102,4 +102,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: ["High Priority", "Incident"]
-          when: ${{ github.event.issue.state == 'open' && contains(github.event.issue.body, 'The bug prevents users from completing some tasks') }}
+          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
