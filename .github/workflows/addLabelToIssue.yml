@@ -18,7 +18,7 @@ jobs:
 
       - name: Create labels if they don't exist
         id: create-labels
-        uses: peter-evans/create-or-update-labels@v2
+        uses: actions-ecosystem/action-add-labels@v1
         with:
           labels: |
             High Priority,ff0000
