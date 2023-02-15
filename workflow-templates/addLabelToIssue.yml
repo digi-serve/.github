@@ -1,0 +1,35 @@
+name: Add Label to Issues
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create labels if they don't exist
+        id: create-labels
+        uses: peter-evans/create-or-update-labels@v2
+        with:
+          labels: |
+            High Priority,ff0000
+            Medium Priority,ff9900
+
+      - name: Add label to issue
+        if: ${{ steps.create-labels.outputs.created == 'true' }}
+        uses: peter-evans/add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            High Priority
+          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
+      
+      - name: Add label to issue
+        if: ${{ steps.create-labels.outputs.created == 'true' }}
+        uses: peter-evans/add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Medium Priority
+          when: ${{ github.event.issue.state == 'open' && contains(github.event.issue.body, 'The bug affects usability or performance, but does not prevent users from completing tasks') }}
