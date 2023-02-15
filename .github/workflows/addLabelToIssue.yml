@@ -1,0 +1,43 @@
+name: Add Label to Issues
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if Incident label exists
+        uses: actions-ecosystem/action-label@v2.0.0
+        with:
+          action: exists
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          label: Incident
+        id: incident-label
+
+      - name: Create labels if they don't exist
+        id: create-labels
+        uses: peter-evans/create-or-update-labels@v2
+        with:
+          labels: |
+            High Priority,ff0000
+            Medium Priority,ff9900
+            Incident,000000
+      - name: Add High Priority and Incident labels
+        if: ${{ steps.incident-label.outputs.label-exists == 'true' }}
+        uses: peter-evans/add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            High Priority, Incident
+          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks (e.g., saving data)') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
+      
+      - name: Add Medium Priority and Incident labels
+        if: ${{ steps.incident-label.outputs.label-exists == 'true' }}
+        uses: peter-evans/add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: |
+            Medium Priority, Incident
+          when: ${{ github.event.issue.state == 'open' && contains(github.event.issue.body, 'The bug prevents users from completing some tasks') }}
