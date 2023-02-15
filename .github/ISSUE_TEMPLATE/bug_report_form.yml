@@ -13,27 +13,27 @@ body:
       description: Briefly describe what happened.
     validations:
       required: true
-- type: dropdown
-  id: bug-severity
-  attributes:
-    label: Does the bug prevent users from working?
-    options:
-      - The bug does not prevent users from working
-      - The bug is an inconvenience but does not prevent users from working
-      - The bug prevents users from completing some tasks
-      - The bug prevents users from completing critical tasks (e.g., saving data)
-    validations:
-      required: true
-  extensions:
-    - id: add-label
-      apply_to: option
+  - type: dropdown
+    id: bug-severity
+    attributes:
+      label: Does the bug prevent users from working?
       options:
-        - label: The bug prevents users from completing some tasks
-          checked: true
-          label: type:bug
-        - label: The bug prevents users from completing critical tasks (e.g., saving data)
-          checked: true
-          label: type:critical-bug
+        - The bug does not prevent users from working
+        - The bug is an inconvenience but does not prevent users from working
+        - The bug prevents users from completing some tasks
+        - The bug prevents users from completing critical tasks (e.g., saving data)
+      validations:
+        required: true
+    extensions:
+      - id: add-label
+        apply_to: option
+        options:
+          - label: The bug prevents users from completing some tasks
+            checked: true
+            label: type:bug
+          - label: The bug prevents users from completing critical tasks (e.g., saving data)
+            checked: true
+            label: type:critical-bug
   - type: textarea
     id: reproduce
     attributes:
