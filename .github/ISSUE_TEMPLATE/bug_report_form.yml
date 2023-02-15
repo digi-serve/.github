@@ -22,6 +22,7 @@ body:
         - The bug is an inconvenience but does not prevent users from working
         - The bug prevents users from completing some tasks
         - The bug prevents users from completing critical tasks (e.g., saving data) 
+    validations:
       required: true
   - type: textarea
     id: reproduce
