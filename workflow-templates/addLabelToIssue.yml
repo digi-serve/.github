@@ -8,6 +8,14 @@ jobs:
   add-label:
     runs-on: ubuntu-latest
     steps:
+      - name: Check if Incident label exists
+        uses: actions-ecosystem/action-label@v2.0.0
+        with:
+          action: exists
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          label: Incident
+        id: incident-label
+
       - name: Create labels if they don't exist
         id: create-labels
         uses: peter-evans/create-or-update-labels@v2
@@ -15,21 +23,22 @@ jobs:
           labels: |
             High Priority,ff0000
             Medium Priority,ff9900
+            Incident,000000
 
-      - name: Add label to issue
-        if: ${{ steps.create-labels.outputs.created == 'true' }}
+      - name: Add High Priority and Incident labels
+        if: ${{ steps.incident-label.outputs.label-exists == 'true' }}
         uses: peter-evans/add-labels@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: |
-            High Priority
-          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
+            High Priority, Incident
+          when: ${{ github.event.issue.state == 'open' && (contains(github.event.issue.body, 'The bug prevents users from completing critical tasks (e.g., saving data)') || contains(github.event.issue.body, 'The bug prevents users from completing some tasks')) }}
       
-      - name: Add label to issue
-        if: ${{ steps.create-labels.outputs.created == 'true' }}
+      - name: Add Medium Priority and Incident labels
+        if: ${{ steps.incident-label.outputs.label-exists == 'true' }}
         uses: peter-evans/add-labels@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: |
-            Medium Priority
-          when: ${{ github.event.issue.state == 'open' && contains(github.event.issue.body, 'The bug affects usability or performance, but does not prevent users from completing tasks') }}
+            Medium Priority, Incident
+          when: ${{ github.event.issue.state == 'open' && contains(github.event.issue.body, 'The bug prevents users from completing some tasks') }}
