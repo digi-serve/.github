@@ -37,9 +37,9 @@ jobs:
           TAGS: ${{ inputs.tags }}
         with:
           script: |
-          const { DOCKER_HUB_REPO, TAGS } = process.env;
-          const fullNames = TAGS.map(tag => `digiserve/${DOCKER_HUB_REPO}:${tag}`);
-          core.setOutput('full_tags', fullNames.join(","));
+            const { DOCKER_HUB_REPO, TAGS } = process.env;
+            const fullNames = TAGS.map(tag => `digiserve/${DOCKER_HUB_REPO}:${tag}`);
+            core.setOutput('full_tags', fullNames.join(","));
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
