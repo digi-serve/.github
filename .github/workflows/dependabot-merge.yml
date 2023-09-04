@@ -2,9 +2,9 @@ name: Dependabot Auto Merge
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
-        description: "Requires permissions contents: write & pull-requests: write"
-        required: true
+      # GITHUB_TOKEN:
+      #   description: "Requires permissions contents: write & pull-requests: write"
+      #   required: true
       DEPENDABOT_TOKEN:
         description: PAT
         required: true

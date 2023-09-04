@@ -33,9 +33,6 @@ jobs:
       - name: Install semver package
         run: npm i semver
 
-      - run: npm pkg get version
-      - run: semver 
-
       - name: Increment the Runtime Version
         uses: actions/github-script@v6
         id: increment_version
@@ -55,7 +52,7 @@ jobs:
             await exec.exec("npm", ["pkg", "get", "version"], { listeners });
             const oldVersion = JSON.parse(output.join(""));
             const buildMeta = build ?? oldVersion.split("+")[1];
-            const newVersion = `${semver.inc(oldVersion, type)}${ buildMeta ? `+${buildMeta}` : ""};
+            const newVersion = `${semver.inc(oldVersion, type)}${ buildMeta ? `+${buildMeta}` : ""}`;
             await exec.exec("npm", ["pkg", "set", `version=${newVersion}`]);
             core.setOutput('new_version', newVersion);
 

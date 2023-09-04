@@ -24,7 +24,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { MAJOR, MINOR, PATCH } = process.env;
+            const { MAJOR, MINOR, PATCH, NO_RELEASE} = process.env;
             let labelCount = 0;
             let label;
             if(PATCH == 'true') {
