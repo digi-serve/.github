@@ -10,7 +10,7 @@ env:
   MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
   MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}
   PATCH: ${{ contains(github.event.pull_request.labels.*.name, 'patch') }}
-  NO_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'no_release') }}
+  NO_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'skip-release') }}
 jobs:
   get-release-type:
     name: Get PR Release Label

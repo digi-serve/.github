@@ -22,6 +22,7 @@ jobs:
   bump:
     name: Bump Version
     runs-on: ubuntu-latest
+    if: ${{ inputs.type != 'no_release' }}
     outputs:
       new_version: ${{ steps.increment_version.outputs.new_version }}
     steps:
