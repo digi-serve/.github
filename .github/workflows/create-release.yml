@@ -9,7 +9,6 @@ on:
 jobs:
   create-release:
     name: Create Release
-    needs: call-bump-version
     runs-on: ubuntu-latest
     steps:
       - name: Extract Release Notes
