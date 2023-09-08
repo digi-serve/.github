@@ -13,7 +13,7 @@ jobs:
         run: | 
           echo "::error::missing release label"
           exit 1
-        if: needs.call-get-labels.outputs.valid != 'true';
+        if: needs.call-get-labels.outputs.valid != 'true'
 
       - name: Add Comment
         uses: NejcZdovc/comment-pr@v2
