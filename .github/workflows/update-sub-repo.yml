@@ -10,7 +10,7 @@ on:
         description: Short name for the sub repo
         required: true
         type: string
-     folder:
+      folder:
         description: Folder name for the sub repo in the main repo
         required: true
         type: string
@@ -20,6 +20,9 @@ on:
     outputs:
       branch:
         value: ${{ jobs.update.outputs.branch }}
+    secrets:
+      TOKEN:
+        required: true
 
 jobs:
   update:
@@ -37,18 +40,23 @@ jobs:
 
       - name: Checkout Repo
         uses: actions/checkout@v3
-      
-      - name: Checkout Sub Repo
-        uses: actions/checkout@v3
         with:
-          repository: ${{ inputs.repository }}
-          path: ${{ inputs.folder }}
-          ref: ${{ inputs.VERSION }}
+          token: ${{ secrets.TOKEN }}
+          submodules: recursive
+          fetch-depth: 0
+
+      - run: git remote set-url origin https://github.com/nh758/appbuilder_platform_service.git
+        working-directory: ./${{ inputs.folder }}
+        
+      - name: Checkout Tag
+        run: git fetch --all --tags && git checkout v${{ inputs.VERSION }}
+        working-directory: ./${{ inputs.folder }}
 
       - name: Commit Change to New Branch
         id: commit_version
         uses: EndBug/add-and-commit@v9
         with:
+          add: ${{ inputs.folder }}
           message: Update ${{ inputs.short_name }} to ${{ inputs.VERSION }}
           new_branch: ${{ steps.set_branch.outputs.branch }}
           default_author: github_actions
