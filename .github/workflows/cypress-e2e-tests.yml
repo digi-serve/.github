@@ -23,6 +23,7 @@ jobs:
         with:
           path: ${{ steps.repo_name.outputs.name }}
           ref: ${{ inputs.ref }}
+          submodules: recursive
 
       - name: Install AppBuilder
         uses: digi-serve/ab-install-action@v1

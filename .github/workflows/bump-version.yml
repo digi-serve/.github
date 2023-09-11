@@ -32,7 +32,8 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Install semver package
-        run: npm i semver
+        # use f to get past knex/objection peer conflict
+        run: npm i semver -f
 
       - name: Increment the Runtime Version
         uses: actions/github-script@v6
