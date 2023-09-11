@@ -30,7 +30,7 @@ jobs:
           BRANCH: ${{ inputs.branch }}
           TITLE: ${{ inputs.title }}
           BODY: ${{ inputs.body }}
-          NOTES: ${{ inputs.notes }}
+          NOTES: ${{ inputs.release_notes }}
         with:
           result-encoding: string
           script: |
