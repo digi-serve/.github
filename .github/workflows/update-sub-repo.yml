@@ -44,9 +44,6 @@ jobs:
           token: ${{ secrets.TOKEN }}
           submodules: recursive
           fetch-depth: 0
-
-      - run: git remote set-url origin https://github.com/nh758/appbuilder_platform_service.git
-        working-directory: ./${{ inputs.folder }}
         
       - name: Checkout Tag
         run: git fetch --all --tags && git checkout v${{ inputs.VERSION }}
