@@ -19,6 +19,11 @@ on:
         description: Notes to be used when the PR gets merged.
         type: string
         required: true
+      base:
+        description: Base to merge into (default `master`).
+        type: string
+        required: false
+        default: master
 jobs:
   fail:
     name: Create a PR
@@ -31,16 +36,17 @@ jobs:
           TITLE: ${{ inputs.title }}
           BODY: ${{ inputs.body }}
           NOTES: ${{ inputs.release_notes }}
+          BASE: ${{ inputs.base }}
         with:
           result-encoding: string
           script: |
-            const { TITLE, BRANCH, BODY, NOTES } = process.env;
+            const { TITLE, BRANCH, BODY, NOTES, BASE } = process.env;
             const body = `${BODY}\n\n # Release Notes\n<!-- #release_notes -->${NOTES}<!-- /release_notes -->`;
             const pr = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: TITLE,
-              base: "master",
+              base: BASE,
               head: BRANCH,
               body,
             });
