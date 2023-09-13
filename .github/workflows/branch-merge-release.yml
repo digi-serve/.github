@@ -15,6 +15,11 @@ on:
         description: Release body
         type: string
         required: true
+      base:
+        description: Base branch to merge into (default `master`)
+        required: false
+        type: string
+        default: master
 jobs:
   merge-release:
     name: Merge & Release
@@ -28,11 +33,11 @@ jobs:
 
       - name: Rebase & Merge
         run: | 
-          git pull origin master &&
-          git checkout master &&
+          git pull origin ${{ inputs.base }} &&
+          git checkout ${{ inputs.base }} &&
           git checkout ${{ inputs.branch }} &&
-          git rebase master &&
-          git checkout master &&
+          git rebase ${{ inputs.base }} &&
+          git checkout ${{ inputs.base }} &&
           git merge "${{ inputs.branch }}" &&
           git push
          
@@ -43,7 +48,7 @@ jobs:
           body: ${{ inputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Delete branch ${{ env.BRANCH }}
+      - name: Delete branch ${{ inputs.BRANCH }}
         uses: dawidd6/action-delete-branch@v3
         with:
           branches: ${{ inputs.branch }}
