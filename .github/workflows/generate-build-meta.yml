@@ -10,7 +10,7 @@ on:
         required: true
     outputs:
       build:
-        value: ${{ jobs.bump.generate-build-meta.build }}
+        value: ${{ jobs.generate-build-meta.build }}
 jobs:
   generate-build-meta:
     name: Generate Build Meta Data
