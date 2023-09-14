@@ -33,4 +33,5 @@ jobs:
             minor = `0${minor}`.slice(-2);
             patch = `0${patch}`.slice(-2);
             const build = `${identifier}${major}${minor}${patch}${meta ? "." + meta : ""}`;
+            console.log('build', build);
             core.setOutput('build', build);
