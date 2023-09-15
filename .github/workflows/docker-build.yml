@@ -38,7 +38,7 @@ jobs:
         with:
           script: |
             const { DOCKER_HUB_REPO, TAGS } = process.env;
-            const tags = TAGS.split(",");
+            const tags = TAGS.replaceAll("+", "_").split(",");
             const fullNames = tags.map(tag => `digiserve/${DOCKER_HUB_REPO}:${tag}`);
             core.setOutput('full_tags', fullNames.join(","));
 
