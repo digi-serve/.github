@@ -44,6 +44,11 @@ jobs:
         with:
           resource: http://localhost:80
           timeout: 300000
+      - name: Debug services
+        run: docker service ls
+
+      - name: Debug api
+        run: docker inspect ab_api_sails
 
       - name: Run Cypress Tests
         run: npm run test:e2e:app -- --browser chrome
