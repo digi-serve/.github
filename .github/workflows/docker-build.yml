@@ -10,6 +10,10 @@ on:
         description: Tag of digiserve/service-cli to use as the base (master/develop)
         default: master
         type: string
+      branch:
+        description: Specify the branch to building 
+        required: false
+        type: string
     secrets:
       DOCKER_USERNAME:
         required: true
@@ -41,6 +45,12 @@ jobs:
             const tags = TAGS.replaceAll("+", "_").split(",");
             const fullNames = tags.map(tag => `digiserve/${DOCKER_HUB_REPO}:${tag}`);
             core.setOutput('full_tags', fullNames.join(","));
+
+      - name: Checkout to update the context for building and pushing the Docker package
+        if: github.event.inputs.branch != ''
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.branch }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
