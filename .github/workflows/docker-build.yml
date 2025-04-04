@@ -47,7 +47,6 @@ jobs:
             core.setOutput('full_tags', fullNames.join(","));
 
       - name: Checkout to update the context for building and pushing the Docker package
-        if: github.event.inputs.branch != ''
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.branch }}
