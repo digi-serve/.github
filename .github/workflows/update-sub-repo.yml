@@ -1,4 +1,5 @@
 name: Update Sub Repo
+# Updates a sub repo to a given version and commits it to a new branch.
 on:
   workflow_call:
     inputs:
@@ -15,11 +16,13 @@ on:
         required: true
         type: string
       version:
+        description: Git tag in the sub repo 
         type: string
         required: true
     outputs:
       branch:
         value: ${{ jobs.update.outputs.branch }}
+        description: Name of the generated branch that this workflow committed to.
     secrets:
       TOKEN:
         required: true

@@ -1,11 +1,15 @@
 name: Get PR Release Label
+# Checks a pr for valid release labels ('major', 'minor', 'patch', 'skip-release').
+# It also verifies that only one release label is present
 on:
   workflow_call:
     outputs:
       label:
         value: ${{ jobs.get-release-type.outputs.label }}
+        description: The label ('major', 'minor', 'patch', or 'no_release')
       valid:
         value: ${{ jobs.get-release-type.outputs.valid }}
+        description: 'True if 1 label was found'
 env:
   MAJOR: ${{ contains(github.event.pull_request.labels.*.name, 'major') }}
   MINOR: ${{ contains(github.event.pull_request.labels.*.name, 'minor') }}

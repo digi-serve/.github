@@ -1,4 +1,5 @@
 name: Cypress E2E Tests
+# Runs our Cypress E2E test suite. Includes setting up AppBuilder using the github reference of the current repository
 on:
   workflow_call:
     inputs:

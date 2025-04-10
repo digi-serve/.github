@@ -1,4 +1,5 @@
 name: Dependabot Auto Merge
+# Automatically merge dependabot prs from ab-utils
 on:
   workflow_call:
     secrets:
