@@ -17,7 +17,7 @@ files.forEach(processFile);
 function processFile(file) {
    const buffer = execSync(`yaml2json ${dir}/${file}`);
    const content = JSON.parse(buffer)
-   let doc = `\n## [${content.name}](${dir}/${file})
+   let doc = `\n### [${content.name}](${dir}/${file})
 ${getDescriptionFromComments(file)}
 **Trigger:** ${Object.keys(content.on)[0]}`
 

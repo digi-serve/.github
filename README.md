@@ -8,12 +8,11 @@ See: [Creating a default community health file](https://docs.github.com/en/commu
 
 These are shared github workflows used in many of our repositories.
 
-
-## [Add Label to Issues](./.github/workflows/addLabelToIssue.yml)
+### [Add Label to Issues](./.github/workflows/addLabelToIssue.yml)
 
 **Trigger:** issues
 
-## [Merge and Release](./.github/workflows/branch-merge-release.yml)
+### [Merge and Release](./.github/workflows/branch-merge-release.yml)
 Merges a branch into master and creates a release\
 **Trigger:** workflow_call
 #### Inputs
@@ -24,7 +23,7 @@ Merges a branch into master and creates a release\
 |body|Release body|string|✔|
 |base|Base branch to merge into (default `master`)|string||
 
-## [Bump Version](./.github/workflows/bump-version.yml)
+### [Bump Version](./.github/workflows/bump-version.yml)
 Increments the version using semver and saves it package.json.
 Creates a tagged commit with the new version\
 **Trigger:** workflow_call
@@ -39,11 +38,11 @@ Creates a tagged commit with the new version\
 |---|---|
 |new_version||
 
-## [Check Release Label](./.github/workflows/check-pr-release-label.yml)
+### [Check Release Label](./.github/workflows/check-pr-release-label.yml)
 Used in PRs to check for a valid release label. Adds a comment if it's missing.\
 **Trigger:** workflow_call
 
-## [Create Release](./.github/workflows/create-release.yml)
+### [Create Release](./.github/workflows/create-release.yml)
 Read release notes from pr and create version from tag\
 **Trigger:** workflow_call
 #### Inputs
@@ -51,7 +50,7 @@ Read release notes from pr and create version from tag\
 |---|---|---|---|
 |tag||string|✔|
 
-## [Cypress E2E Tests](./.github/workflows/cypress-e2e-tests.yml)
+### [Cypress E2E Tests](./.github/workflows/cypress-e2e-tests.yml)
 Runs our Cypress E2E test suite. Includes setting up AppBuilder using the github reference of the current repository\
 **Trigger:** workflow_call
 #### Inputs
@@ -59,7 +58,7 @@ Runs our Cypress E2E test suite. Includes setting up AppBuilder using the github
 |---|---|---|---|
 |ref||string||
 
-## [Dependabot Auto Merge](./.github/workflows/dependabot-merge.yml)
+### [Dependabot Auto Merge](./.github/workflows/dependabot-merge.yml)
 Automatically merge dependabot prs from ab-utils\
 **Trigger:** workflow_call
  #### Secrets
@@ -67,7 +66,7 @@ Automatically merge dependabot prs from ab-utils\
 |---|---|
 |DEPENDABOT_TOKEN|PAT|
 
-## [Docker Build and Push](./.github/workflows/docker-build.yml)
+### [Docker Build and Push](./.github/workflows/docker-build.yml)
 Builds a new docker image and push it to dockerhub\
 **Trigger:** workflow_call
 #### Inputs
@@ -82,7 +81,7 @@ Builds a new docker image and push it to dockerhub\
 |DOCKER_USERNAME||
 |DOCKER_PASSWORD||
 
-## [Generate Build Meta Data](./.github/workflows/generate-build-meta.yml)
+### [Generate Build Meta Data](./.github/workflows/generate-build-meta.yml)
 
 **Trigger:** workflow_call
 #### Inputs
@@ -95,7 +94,7 @@ Builds a new docker image and push it to dockerhub\
 |---|---|
 |build||
 
-## [Get PR Release Label](./.github/workflows/get-pr-release-label.yml)
+### [Get PR Release Label](./.github/workflows/get-pr-release-label.yml)
 Checks a pr for valid release labels ('major', 'minor', 'patch', 'skip-release').
 It also verifies that only one release label is present\
 **Trigger:** workflow_call
@@ -105,7 +104,7 @@ It also verifies that only one release label is present\
 |label|The label ('major', 'minor', 'patch', or 'no_release')|
 |valid|True if 1 label was found|
 
-## [Open PR](./.github/workflows/open-pr.yml)
+### [Open PR](./.github/workflows/open-pr.yml)
 Creates a PR\
 **Trigger:** workflow_call
 #### Inputs
@@ -117,7 +116,7 @@ Creates a PR\
 |release_notes|Notes to be used when the PR gets merged.|string|✔|
 |base|Base to merge into (default `master`).|string||
 
-## [Update Sub Repo](./.github/workflows/update-sub-repo.yml)
+### [Update Sub Repo](./.github/workflows/update-sub-repo.yml)
 Updates a sub repo to a given version and commits it to a new branch.\
 **Trigger:** workflow_call
 #### Inputs
