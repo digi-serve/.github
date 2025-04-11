@@ -1,4 +1,5 @@
 name: Docker Build and Push
+# Builds a new docker image and push it to dockerhub
 on:
   workflow_call:
     inputs:

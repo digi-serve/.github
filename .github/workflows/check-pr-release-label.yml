@@ -1,4 +1,5 @@
 name: Check Release Label
+# Used in PRs to check for a valid release label. Adds a comment if it's missing.
 on:
   workflow_call:
 jobs:

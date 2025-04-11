@@ -1,6 +1,6 @@
 name: Bump Version
-# Increments the version using semver and saves it package.json
-# Creates a tagged commit with using the new version
+# Increments the version using semver and saves it package.json.
+# Creates a tagged commit with the new version
 on:
   workflow_call:
     inputs:
