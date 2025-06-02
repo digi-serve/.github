@@ -56,7 +56,7 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           repository: ${{ github.repository_owner }}/${{ matrix.repo }}
           event-type: ${{ inputs.dispatch_type }} 
-          client-payload: |
+          client-payload: |-
             {
               "type": "${{ inputs.type }}", 
               "version": "${{ inputs.version }}", 
