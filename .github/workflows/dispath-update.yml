@@ -60,6 +60,6 @@ jobs:
             {
               "type": "${{ inputs.type }}", 
               "version": "${{ inputs.version }}", 
-              "service": "${{ steps.get-name.outputs.result }}",
-              "repo": "${{ steps.get-name.outputs.result }}"
+              "service": ${{ steps.get-name.outputs.result }},
+              "repo": ${{ steps.get-name.outputs.result }}
             }
