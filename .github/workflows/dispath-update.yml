@@ -47,6 +47,8 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            console.log(JSON.stringify(context));
+            console.log(context.repo);
             const [_owner, repo] = context.repo.split("/");
             const match = repo.match(/ab_service_(.+)/);
             return match?.[1] ?? repo
