@@ -1,0 +1,40 @@
+name: "TEST REPO DISPATCH"
+on: 
+  workflow_dispatch:
+    inputs:
+      dispatch_repos:
+        description: 'JSON array of repositories to update. Eg. "[\"ab_runtime\"]"'
+        required: false
+        type: string
+      dispatch_type:
+        description: Event type for the dispatch
+        default: test_event
+        type: string
+      type:
+        description: Update type (major, minor, or patch)
+        required: true
+        type: string
+      version:
+        description: The version of this update
+        required: true
+        type: string
+      app_id:
+        description: GitHub App ID (or clientID) for auth
+        required: true
+        type: string
+      app_secret:
+        description: GitHub App client secret for auth
+        required: true
+        type: string
+
+jobs:
+  call_dispatch:
+    uses: ./.github/workflows/your_dispatch_workflow.yml
+    with:
+      dispatch_repos: ${{ github.event.inputs.dispatch_repos }}
+      dispatch_type: ${{ github.event.inputs.dispatch_type }}
+      type: ${{ github.event.inputs.type }}
+      version: ${{ github.event.inputs.version }}
+      app_id: ${{ github.event.inputs.app_id }}
+    secrets:
+      app_secret: ${{ github.event.inputs.app_secret }}
