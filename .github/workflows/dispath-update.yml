@@ -47,7 +47,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const name = context.repository.name;
+            const name = context.payload.repository.name;
             const match = name.match(/ab_service_(.+)/);
             return match?.[1] ?? name
       - name: Repository Dispatch
