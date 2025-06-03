@@ -8,6 +8,7 @@ See: [Creating a default community health file](https://docs.github.com/en/commu
 
 These are shared github workflows used in many of our repositories.
 
+
 ### [Add Label to Issues](./.github/workflows/addLabelToIssue.yml)
 
 **Trigger:** issues
@@ -65,6 +66,22 @@ Automatically merge dependabot prs from ab-utils\
 |Name|Description|
 |---|---|
 |DEPENDABOT_TOKEN|PAT|
+
+### [Dispatch Update](./.github/workflows/dispath-update.yml)
+Triger a workflow in another repo that needs to update the curent repos code\
+**Trigger:** workflow_call
+#### Inputs
+|Name|Description|Type|Required|
+|---|---|---|---|
+|dispatch_repos|JSON array of repositories to update. Eg. "[\"ab_runtime\"]"|string||
+|dispatch_type|Event type for the dispatch|string||
+|type|Update type (major, minor, or patch)|string|✔|
+|version|The version of this update|string|✔|
+|app_id|GitHub App ID (or clientID) for auth|string|✔|
+ #### Secrets
+|Name|Description|
+|---|---|
+|app_secret|GitHub App client secret for auth|
 
 ### [Docker Build and Push](./.github/workflows/docker-build.yml)
 Builds a new docker image and push it to dockerhub\
